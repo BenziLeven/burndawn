@@ -1,6 +1,8 @@
 <template>
   <div class="side-panel">
-    side panel
+    <div class="logo">
+      LOGO
+    </div>
   </div>
 </template>
 
@@ -12,6 +14,9 @@ export default {
 
 <style scoped lang="scss">
 .side-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   left: 0;
 
@@ -22,8 +27,20 @@ export default {
 
   background: #919467;
 
-&:hover {
+  &:hover {
    width: $side-panel-width-open;
- }
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    font-size: 34px;
+
+    border: solid 1px red;
+    height: 80px;
+  }
 }
 </style>
