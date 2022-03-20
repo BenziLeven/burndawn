@@ -24,9 +24,9 @@ export default Vue.extend({
   name: "NavMenuItem",
   props: {
     menuItems: {
-      type: Object,
+      type: Array,
       required: true
-    }as PropOptions<MenuItem>
+    }as PropOptions<MenuItem[]>
   },
   methods: {
     hasChildren (item:MenuItem):Boolean {
@@ -51,6 +51,14 @@ export default Vue.extend({
       font-size: 16px;
 
       height: 40px;
+
+      background-color: #ffffff11;
+
+      &:hover {
+        background-color: #ffffff33;
+
+        cursor: pointer;
+      }
     }
   }
 
