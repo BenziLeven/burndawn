@@ -1,12 +1,25 @@
 <template>
   <div class="test">
-    test
+    <div v-for="item in menuItems" :key="`${item.name}`" class="item">
+      <div class="item-label">
+        {{ item.label }}-{{ item.to }}
+      </div>
+      <div v-if="hasChildren(item)" class="sub-elements">
+        <NavMenuItem :menu-items="item.children" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue, { PropOptions } from "vue"
-import type { MenuItem } from "./SidePanel"
+
+export type MenuItem = {
+  label: string,
+  to: string,
+  children?: MenuItem[]
+}
+
 export default Vue.extend({
   name: "NavMenuItem",
   props: {
@@ -14,10 +27,35 @@ export default Vue.extend({
       type: Object,
       required: true
     }as PropOptions<MenuItem>
+  },
+  methods: {
+    hasChildren (item:MenuItem):Boolean {
+      if ("children" in item) {
+        return !!item.children?.length
+      }
+      return false
+    }
   }
 })
 </script>
 
-<!--<style scoped>-->
+<style scoped lang="scss">
+.test {
+  width: 100%;
+  border: solid 1px blue;
 
-<!--</style>-->
+  .item {
+    border: solid 1px black;
+
+    .item-label {
+      font-size: 16px;
+
+      height: 40px;
+    }
+  }
+
+  .sub-elements {
+    padding-left: 8px;
+  }
+}
+</style>

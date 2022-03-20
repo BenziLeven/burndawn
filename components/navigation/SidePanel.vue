@@ -3,36 +3,39 @@
     <div class="logo">
       LOGO
     </div>
-    <NavMenuItem />
+    <NavMenuItem :menu-items="menuItems" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
-import NavMenuItem from "@/components/navigation/NavMenuItem"
+import NavMenuItem from "./NavMenuItem.vue"
+import type { MenuItem } from "./NavMenuItem.vue"
 
-export type MenuItem = {
-  label: string,
-  to: string,
-  children?: MenuItem[]
-}
+const menuItems: MenuItem[] = [
+  { label: "Test1", to: "/test1" },
+  { label: "Test2", to: "/test2" },
+  {
+    label: "Test3",
+    to: "/test3",
+    children: [
+      { label: "Test3.1", to: "/test1" },
+      {
+        label: "Test3.2",
+        to: "/test2",
+        children: [
+          { label: "Test3.2.1", to: "/test1" },
+          { label: "Test3.2.2", to: "/test1" }
+        ]
+      }
+    ]
+  }
+]
 
 export default Vue.extend({
   name: "SidePanel",
   components: { NavMenuItem },
   data () {
-    const menuItems: MenuItem[] = [
-      { label: "Test1", to: "/test1" },
-      { label: "Test2", to: "/test2" },
-      {
-        label: "Test3",
-        to: "/test3",
-        children: [
-          { label: "Test1", to: "/test1" },
-          { label: "Test2", to: "/test2" }
-        ]
-      }
-    ]
     return {
       menuItems
     }
