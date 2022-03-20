@@ -3,13 +3,41 @@
     <div class="logo">
       LOGO
     </div>
+    <NavMenuItem />
   </div>
 </template>
 
-<script>
-export default {
-  name: "SidePanel"
+<script lang="ts">
+import Vue from "vue"
+import NavMenuItem from "@/components/navigation/NavMenuItem"
+
+export type MenuItem = {
+  label: string,
+  to: string,
+  children?: MenuItem[]
 }
+
+export default Vue.extend({
+  name: "SidePanel",
+  components: { NavMenuItem },
+  data () {
+    const menuItems: MenuItem[] = [
+      { label: "Test1", to: "/test1" },
+      { label: "Test2", to: "/test2" },
+      {
+        label: "Test3",
+        to: "/test3",
+        children: [
+          { label: "Test1", to: "/test1" },
+          { label: "Test2", to: "/test2" }
+        ]
+      }
+    ]
+    return {
+      menuItems
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">
