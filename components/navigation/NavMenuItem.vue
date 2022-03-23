@@ -13,12 +13,7 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from "vue"
-
-export type MenuItem = {
-  label: string,
-  to: string,
-  children?: MenuItem[]
-}
+import type { MenuItem } from "~/types/navigation"
 
 export default Vue.extend({
   name: "NavMenuItem",

@@ -10,7 +10,7 @@
 <script lang="ts">
 import Vue from "vue"
 import NavMenuItem from "./NavMenuItem.vue"
-import type { MenuItem } from "./NavMenuItem.vue"
+import type { MenuItem } from "~/types/navigation"
 
 const menuItems: MenuItem[] = [
   { label: "Test1", to: "/test1" },
