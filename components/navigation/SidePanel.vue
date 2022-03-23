@@ -10,34 +10,15 @@
 <script lang="ts">
 import Vue from "vue"
 import NavMenuItem from "./NavMenuItem.vue"
-import type { MenuItem } from "~/types/navigation"
 
-const menuItems: MenuItem[] = [
-  { label: "Test1", to: "/test1" },
-  { label: "Test2", to: "/test2" },
-  {
-    label: "Test3",
-    to: "/test3",
-    children: [
-      { label: "Test3.1", to: "/test1" },
-      {
-        label: "Test3.2",
-        to: "/test2",
-        children: [
-          { label: "Test3.2.1", to: "/test1" },
-          { label: "Test3.2.2", to: "/test1" }
-        ]
-      }
-    ]
-  }
-]
+import { MENU_ITEMS } from "~/content/navigation"
 
 export default Vue.extend({
   name: "SidePanel",
   components: { NavMenuItem },
   data () {
     return {
-      menuItems
+      menuItems: MENU_ITEMS
     }
   }
 })
