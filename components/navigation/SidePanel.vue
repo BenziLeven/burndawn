@@ -1,9 +1,9 @@
 <template>
-  <div class="side-panel">
+  <div class="side-panel" @mouseover="onMouseOver" @mouseout="onMouseOut">
     <div class="logo">
       LOGO
     </div>
-    <NavMenu />
+    <NavMenu :is-expanded="isExpanded" />
   </div>
 </template>
 
@@ -13,7 +13,20 @@ import NavMenu from "./NavMenu.vue"
 
 export default Vue.extend({
   name: "SidePanel",
-  components: { NavMenu }
+  components: { NavMenu },
+  data () {
+    return {
+      isExpanded: false
+    }
+  },
+  methods: {
+    onMouseOver () {
+      this.isExpanded = true
+    },
+    onMouseOut () {
+      this.isExpanded = false
+    }
+  }
 })
 </script>
 

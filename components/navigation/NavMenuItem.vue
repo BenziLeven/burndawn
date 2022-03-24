@@ -7,17 +7,17 @@
         :to="item.to"
       >
         <SvgIcon :name="item.iconName" class="item-icon" />
-        <span>{{ item.label }}</span>
+        <span v-if="isExpanded">{{ item.label }}</span>
       </NuxtLink>
       <div
         v-else
         class="item-label"
       >
         <SvgIcon :name="item.iconName" class="item-icon" />
-        <span>{{ item.label }}</span>
+        <span v-if="isExpanded">{{ item.label }}</span>
       </div>
       <div v-if="item.children && item.children.length" class="sub-elements">
-        <NavMenuItem :menu-items="item.children" />
+        <NavMenuItem :menu-items="item.children" :is-expanded="isExpanded" />
       </div>
     </div>
   </div>
@@ -31,17 +31,12 @@ import SvgIcon from "~/components/generic/SvgIcon.vue"
 export default Vue.extend({
   name: "NavMenuItem",
   components: { SvgIcon },
-
   props: {
     menuItems: {
       type: Array,
       required: true
-    }as PropOptions<MenuItem[]>
-  },
-  data () {
-    return {
-      icons: {}
-    }
+    }as PropOptions<MenuItem[]>,
+    isExpanded: Boolean
   }
 })
 </script>

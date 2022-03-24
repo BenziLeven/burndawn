@@ -1,6 +1,7 @@
 <template>
   <NavMenuItem
     :menu-items="menuItems"
+    :is-expanded="isExpanded"
   />
 </template>
 
@@ -13,6 +14,9 @@ export default Vue.extend({
   name: "NavMenu",
   components: {
     NavMenuItem
+  },
+  props: {
+    isExpanded: Boolean
   },
   data () {
     return {
