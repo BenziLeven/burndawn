@@ -31,6 +31,7 @@ export default Vue.extend({
   transition: width .3s ease;
 
   background: #919467;
+  overflow: hidden;
 
   &:hover {
    width: $side-panel-width-open;

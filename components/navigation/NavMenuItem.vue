@@ -1,20 +1,22 @@
 <template>
-  <div class="test">
+  <div class="nav-menu-items">
     <div v-for="item in menuItems" :key="`${item.label}`" class="item">
       <NuxtLink
         v-if="item.to"
         class="item-label"
         :to="item.to"
       >
-        {{ item.label }}
+        <SvgIcon :name="item.iconName" class="item-icon" />
+        <span>{{ item.label }}</span>
       </NuxtLink>
       <div
         v-else
         class="item-label"
       >
-        {{ item.label }}
+        <SvgIcon :name="item.iconName" class="item-icon" />
+        <span>{{ item.label }}</span>
       </div>
-      <div v-if="hasChildren(item)" class="sub-elements">
+      <div v-if="item.children && item.children.length" class="sub-elements">
         <NavMenuItem :menu-items="item.children" />
       </div>
     </div>
@@ -24,9 +26,12 @@
 <script lang="ts">
 import Vue, { PropOptions } from "vue"
 import type { MenuItem } from "~/types/navigation"
+import SvgIcon from "~/components/generic/SvgIcon.vue"
 
 export default Vue.extend({
   name: "NavMenuItem",
+  components: { SvgIcon },
+
   props: {
     menuItems: {
       type: Array,
@@ -37,21 +42,13 @@ export default Vue.extend({
     return {
       icons: {}
     }
-  },
-  methods: {
-    hasChildren (item:MenuItem):Boolean {
-      if ("children" in item) {
-        return !!item.children?.length
-      }
-      return false
-    }
   }
 })
 </script>
 
 <style scoped lang="scss">
-.test {
-  width: 100%;
+.nav-menu-items {
+  min-width: 100%;
   border-top: solid 1px rgba(#eeeeee, .5);
 
   .item {
@@ -62,13 +59,14 @@ export default Vue.extend({
     width: 100%;
 
     a.item-label {
-      display: block;
       color: #ADC606;
       text-decoration: none;
       width: 100%;
 
     }
     .item-label {
+      display: flex;
+      align-items: center;
       font-size: 16px;
       height: 40px;
       width: 100%;
@@ -78,6 +76,17 @@ export default Vue.extend({
         background-color: #ffffff33;
 
         cursor: pointer;
+      }
+
+      .item-icon {
+        margin: 0 4px;
+        width: 32px;
+        height: 32px;
+        fill: $color-lime;
+
+        background-color: red;
+        border-radius: 4px;
+        padding: 1px;
       }
     }
   }
