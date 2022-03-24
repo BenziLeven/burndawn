@@ -1,8 +1,18 @@
 <template>
   <div class="test">
     <div v-for="item in menuItems" :key="`${item.label}`" class="item">
-      <div class="item-label">
-        {{ item.label }}-{{ item.to }}
+      <NuxtLink
+        v-if="item.to"
+        class="item-label"
+        :to="item.to"
+      >
+        {{ item.label }}
+      </NuxtLink>
+      <div
+        v-else
+        class="item-label"
+      >
+        {{ item.label }}
       </div>
       <div v-if="hasChildren(item)" class="sub-elements">
         <NavMenuItem :menu-items="item.children" />
@@ -37,16 +47,26 @@ export default Vue.extend({
 <style scoped lang="scss">
 .test {
   width: 100%;
-  border: solid 1px blue;
+  border-top: solid 1px rgba(#eeeeee, .5);
 
   .item {
-    border: solid 1px black;
+    &:not(:first-child) {
+      border-top: solid 1px rgba(#eeeeee, .5);
+    }
 
+    width: 100%;
+
+    a.item-label {
+      display: block;
+      color: #ADC606;
+      text-decoration: none;
+      width: 100%;
+
+    }
     .item-label {
       font-size: 16px;
-
       height: 40px;
-
+      width: 100%;
       background-color: #ffffff11;
 
       &:hover {
