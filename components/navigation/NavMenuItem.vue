@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <div v-for="item in menuItems" :key="`${item.name}`" class="item">
+    <div v-for="item in menuItems" :key="`${item.label}`" class="item">
       <div class="item-label">
         {{ item.label }}-{{ item.to }}
       </div>

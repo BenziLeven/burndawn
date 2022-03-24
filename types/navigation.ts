@@ -2,6 +2,6 @@ type StringRoute = `/${string}`
 
 export type MenuItem = {
   label: string,
-  to: StringRoute,
+  to?: StringRoute,
   children?: MenuItem[]
 }
