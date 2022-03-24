@@ -12,12 +12,13 @@
       <div
         v-else
         class="item-label"
+        @click="toggleChildren(item)"
       >
         <SvgIcon :name="item.iconName" class="item-icon" />
         <span v-if="isExpanded">{{ item.label }}</span>
       </div>
       <div v-if="item.children && item.children.length" class="sub-elements">
-        <NavMenuItem :menu-items="item.children" :is-expanded="isExpanded" />
+        <NavMenuItem v-if="isMenuOpen[item.label]" :menu-items="item.children" :is-expanded="isExpanded" />
       </div>
     </div>
   </div>
@@ -37,6 +38,21 @@ export default Vue.extend({
       required: true
     }as PropOptions<MenuItem[]>,
     isExpanded: Boolean
+  },
+  data () {
+    const isMenuOpen: Record<string, boolean> = {}
+    for (const item of this.menuItems) {
+      if (item.children && item.children.length > 0) {
+        isMenuOpen[item.label] = false
+      }
+    }
+
+    return { isMenuOpen }
+  },
+  methods: {
+    toggleChildren (item: MenuItem) {
+      this.isMenuOpen[item.label] = !this.isMenuOpen[item.label]
+    }
   }
 })
 </script>
