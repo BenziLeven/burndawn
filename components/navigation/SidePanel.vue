@@ -3,24 +3,17 @@
     <div class="logo">
       LOGO
     </div>
-    <NavMenuItem :menu-items="menuItems" />
+    <NavMenu />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
-import NavMenuItem from "./NavMenuItem.vue"
-
-import { MENU_ITEMS } from "~/content/navigation"
+import NavMenu from "./NavMenu.vue"
 
 export default Vue.extend({
   name: "SidePanel",
-  components: { NavMenuItem },
-  data () {
-    return {
-      menuItems: MENU_ITEMS
-    }
-  }
+  components: { NavMenu }
 })
 </script>
 

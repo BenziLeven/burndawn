@@ -33,6 +33,11 @@ export default Vue.extend({
       required: true
     }as PropOptions<MenuItem[]>
   },
+  data () {
+    return {
+      icons: {}
+    }
+  },
   methods: {
     hasChildren (item:MenuItem):Boolean {
       if ("children" in item) {
