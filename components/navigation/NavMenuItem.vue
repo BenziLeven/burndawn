@@ -7,7 +7,7 @@
         :to="item.to"
       >
         <SvgIcon :name="item.iconName" class="item-icon" />
-        <span v-if="isExpanded">{{ item.label }}</span>
+        <span v-show="isExpanded">{{ item.label }}</span>
       </NuxtLink>
       <div
         v-else
@@ -15,7 +15,7 @@
         @click="toggleChildren(item)"
       >
         <SvgIcon :name="item.iconName" class="item-icon" />
-        <span v-if="isExpanded">{{ item.label }}</span>
+        <span v-show="isExpanded">{{ item.label }} <span class="caret" :class="{inv: isMenuOpen[item.label]}">▴</span></span>
       </div>
       <div v-if="item.children && item.children.length" class="sub-elements">
         <NavMenuItem v-if="isMenuOpen[item.label]" :menu-items="item.children" :is-expanded="isExpanded" />
@@ -98,6 +98,15 @@ export default Vue.extend({
         background-color: red;
         border-radius: 4px;
         padding: 1px;
+      }
+
+      .caret {
+        margin-left: 4px;
+        font-size: 24px;
+
+        .inv {
+          transform: rotate(45deg);
+        }
       }
     }
   }
