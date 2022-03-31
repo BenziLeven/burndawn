@@ -4,19 +4,24 @@
       LOGO
     </div>
     <NavMenu :is-expanded="isExpanded" />
+    <LoginButton v-if="! isUserLoggedIn" />
+    <LogoutButton v-else />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
 import NavMenu from "./NavMenu.vue"
+import LoginButton from "./LoginButton.vue"
+import LogoutButton from "./LogoutButton.vue"
 
 export default Vue.extend({
   name: "SidePanel",
-  components: { NavMenu },
+  components: { NavMenu, LoginButton, LogoutButton },
   data () {
     return {
-      isExpanded: false
+      isExpanded: false,
+      isUserLoggedIn: true
     }
   },
   methods: {
@@ -40,6 +45,7 @@ export default Vue.extend({
 
   height: 100%;
   width: $side-panel-width-collapsed;
+  padding: 4px;
 
   transition: width .3s ease;
 
